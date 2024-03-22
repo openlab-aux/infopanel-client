@@ -1,6 +1,6 @@
 export default class CancellableTimeout {
     public promise: Promise<void>
-    private resolve: undefined | ( (value: void | PromiseLike<void>) => void )
+    private resolve: undefined | ((value: void | PromiseLike<void>) => void)
 
     constructor(duration: number) {
         this.promise = new Promise<void>((resolve) => {
@@ -12,7 +12,7 @@ export default class CancellableTimeout {
     }
 
     cancel() {
-        if(this.resolve) {
+        if (this.resolve) {
             this.resolve()
         }
     }

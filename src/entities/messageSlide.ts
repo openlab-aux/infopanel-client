@@ -1,11 +1,11 @@
-import { ISlide } from "./content";
+import { ISlide } from './content'
 
-export interface IMessageSlide extends ISlide{
+export interface IMessageSlide extends ISlide {
     message: {
         text: string
     }
 }
 
 function isIMessageSlide(slide: ISlide): slide is IMessageSlide {
-    return ( 'message' in slide ) && (typeof slide.message == 'object' )
+    return 'message' in slide && typeof slide.message == 'object'
 }

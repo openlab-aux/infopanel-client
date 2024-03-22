@@ -1,21 +1,21 @@
-import { ISlide } from "../entities/content"
-import AbstractRenderer from "./abstractRenderer"
-import MarkdownRenderer from "./markdownRenderer"
-import MessageRenderer from "./messageRenderer"
+import { ISlide } from '../entities/content'
+import AbstractRenderer from './abstractRenderer'
+import MarkdownRenderer from './markdownRenderer'
+import MessageRenderer from './messageRenderer'
 
 export default function getRenderer(slide: ISlide): AbstractRenderer | null {
-    switch(slide.type) {
-        case "message": {
+    switch (slide.type) {
+        case 'message': {
             return new MessageRenderer(slide)
-            break;
+            break
         }
-        case "markdown": {
+        case 'markdown': {
             return new MarkdownRenderer(slide)
-            break;
+            break
         }
-        default:{
+        default: {
             return null
-            break;
+            break
         }
     }
 }

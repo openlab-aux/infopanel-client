@@ -1,6 +1,6 @@
-import { ISlide } from "./content";
+import { ISlide } from './content'
 
-export interface IMarkdownSlide extends ISlide{
+export interface IMarkdownSlide extends ISlide {
     markdown: {
         text?: string
         columns?: {
@@ -9,15 +9,14 @@ export interface IMarkdownSlide extends ISlide{
                 text: string
             }
         }
-
     }
 }
 
 function isIMarkdownSlide(slide: ISlide): slide is IMarkdownSlide {
-    if(!('markdown' in slide)) {
+    if (!('markdown' in slide)) {
         return false
     }
-    if(!slide.markdown || slide.markdown) {
+    if (!slide.markdown || slide.markdown) {
         return false
     }
 

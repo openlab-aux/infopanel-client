@@ -1,16 +1,16 @@
-import * as marked from 'marked';
+import * as marked from 'marked'
 
-import CancellableTimeout from "../util/CancellableTimeout";
-import SetContent from "../util/SetContent";
-import AbstractRenderer from "./abstractRenderer";
-import { ISlide } from "../entities/content";
+import CancellableTimeout from '../util/CancellableTimeout'
+import SetContent from '../util/SetContent'
+import AbstractRenderer from './abstractRenderer'
+import { ISlide } from '../entities/content'
 
 interface MarkdownColunn {
     width: number
     text: string
 }
 
-export interface IMarkdownSlide extends ISlide{
+export interface IMarkdownSlide extends ISlide {
     markdown: {
         text?: string
         columns?: Array<MarkdownColunn>
@@ -18,10 +18,10 @@ export interface IMarkdownSlide extends ISlide{
 }
 
 function isIMarkdownSlide(slide: ISlide): slide is IMarkdownSlide {
-    if(!('markdown' in slide)) {
+    if (!('markdown' in slide)) {
         return false
     }
-    if(!slide.markdown || slide.markdown) {
+    if (!slide.markdown || slide.markdown) {
         return false
     }
 
@@ -43,7 +43,7 @@ export default class MarkdownRenderer extends AbstractRenderer {
 
     finished(): Promise<void> {
         this.timeout = new CancellableTimeout(this.slide.duration ?? 10000)
-        if(this.cancelled) {
+        if (this.cancelled) {
             this.timeout.cancel()
         }
         return this.timeout.promise
@@ -52,53 +52,60 @@ export default class MarkdownRenderer extends AbstractRenderer {
     run(target: HTMLElement): void {
         let currentSlide = this.slide as IMarkdownSlide
 
-        target.innerHTML = ""
-            
+        target.innerHTML = ''
+
         marked.use({
             pedantic: false,
             gfm: true,
-            breaks: false
-        });
+            breaks: false,
+        })
 
-        if(currentSlide.markdown.text) {
-            marked.parse(currentSlide.markdown.text, {async: true}).then((html) => {
-                SetContent(target, html, this.stylesheet)
-            })
-        } else if(currentSlide.markdown.columns !== undefined) {
+        if (currentSlide.markdown.text) {
+            marked
+                .parse(currentSlide.markdown.text, { async: true })
+                .then((html) => {
+                    SetContent(target, html, this.stylesheet)
+                })
+        } else if (currentSlide.markdown.columns !== undefined) {
             let style = currentSlide.markdown.columns.reduce(
                 (prev, current, index) => {
-                    return prev + `
+                    return (
+                        prev +
+                        `
 
                         #col-${index} {
                             flex: ${current.width}%;
-                            background-color: ${'#'+(0x1000000+Math.random()*0xffffff).toString(16).substr(1,6)};
+                            background-color: ${'#' + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6)};
                         }
                     `
+                    )
                 },
-                this.stylesheet 
+                this.stylesheet
             )
 
             Promise.allSettled(
-                currentSlide.markdown.columns.map(
-                    (column) => marked.parse(column.text, {async: true})
+                currentSlide.markdown.columns.map((column) =>
+                    marked.parse(column.text, { async: true })
                 )
             ).then((results) => {
-                if(!results.every((result) => result.status == 'fulfilled')) {
-                    console.error("one or more columns failed to parse.")
+                if (!results.every((result) => result.status == 'fulfilled')) {
+                    console.error('one or more columns failed to parse.')
                     return
                 }
 
-                let html = ""
+                let html = ''
 
-                results.
-                    flatMap((result) => result.status == 'fulfilled' ? [ result.value ] : []).
-                    forEach((columnHtml, index) => {
+                results
+                    .flatMap((result) =>
+                        result.status == 'fulfilled' ? [result.value] : []
+                    )
+                    .forEach((columnHtml, index) => {
                         html += `<div id="col-${index}">${columnHtml}</div>`
                     })
 
                 SetContent(target, html, style)
             })
-       }
+        }
     }
 
     cancel() {

@@ -1,7 +1,7 @@
-import { IMessageSlide } from "../entities/messageSlide";
-import CancellableTimeout from "../util/CancellableTimeout";
-import SetContent from "../util/SetContent";
-import AbstractRenderer from "./abstractRenderer";
+import { IMessageSlide } from '../entities/messageSlide'
+import CancellableTimeout from '../util/CancellableTimeout'
+import SetContent from '../util/SetContent'
+import AbstractRenderer from './abstractRenderer'
 
 export default class MessageRenderer extends AbstractRenderer {
     stylesheet = `
@@ -19,11 +19,14 @@ export default class MessageRenderer extends AbstractRenderer {
         return this.timeout.promise
     }
 
-
     run(target: HTMLElement) {
         let messageSlide = this.slide as IMessageSlide
 
-        SetContent(target, `<h1>${messageSlide.message.text}</h1>`, this.stylesheet)
+        SetContent(
+            target,
+            `<h1>${messageSlide.message.text}</h1>`,
+            this.stylesheet
+        )
     }
 
     cancel() {

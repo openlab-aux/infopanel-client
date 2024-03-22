@@ -1,10 +1,10 @@
-import { ISlide } from "../entities/content"
-import { Task } from "../services/content/taskManager"
+import { ISlide } from '../entities/content'
+import { Task } from '../services/content/taskManager'
 
 export default abstract class AbstractRenderer implements Task {
     slide: ISlide
     stylesheet?: string
-    
+
     constructor(slide: ISlide) {
         this.slide = slide
     }
