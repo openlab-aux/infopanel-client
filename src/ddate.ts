@@ -77,11 +77,11 @@ export default class DDate {
 
     toString(): string {
         let suffix = 'th'
-        if (this.getDayOfWeek() == 1) {
+        if (this.getSeasonDay() == 0) {
             suffix = 'st'
-        } else if (this.getDayOfWeek() == 2) {
+        } else if (this.getSeasonDay() == 1) {
             suffix = 'nd'
-        } else if (this.getDayOfWeek() == 3) {
+        } else if (this.getSeasonDay() == 2) {
             suffix = 'rd'
         }
 
