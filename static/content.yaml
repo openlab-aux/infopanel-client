@@ -1,0 +1,44 @@
+# - type: markdown
+#   duration: 1000
+#   markdown: 
+#     text: |
+#       # Vorbeischauen?
+
+#       ![](https://picsum.photos/200/300)
+
+#       An folgenden Tagen ist das OpenLab ab ca. 19:00 Uhr für Nichtmitglieder geöffnet:
+
+#       * **Dienstag**
+#       * **Donnerstag**
+- type: markdown
+  duration: 10000
+  markdown:
+    columns:
+      - width: 30
+        text: | 
+          ![](https://picsum.photos/400/600)
+      - width: 70
+        text: |
+          # Column 2
+
+
+# - type: message
+#   duration: 5000
+#   message:
+#     text: Message 1
+# - type: message
+#   duration: 5000
+#   message:
+#     text: Message 2
+# - type: message
+#   duration: 5000
+#   message:
+#     text: Message 3
+# - type: message
+#   duration: 5000
+#   message:
+#     text: Message 4
+# - type: message
+#   duration: 5000
+#   message:
+#     text: Message 5

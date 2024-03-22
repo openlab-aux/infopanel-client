@@ -1,0 +1,39 @@
+@font-face {
+  font-family: SFProDisplayRegular;
+  src: url("SF-Pro-Display-Regular.otf") format("opentype");
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  display: grid;
+}
+
+body {
+  font-family: SFProDisplayRegular;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+#content {
+  top: 12pt;
+  left: 12pt;
+  background-color: red;
+}
+
+#footer {
+  display: grid;
+  top: 12pt;
+  left: 12pt;
+  grid-template-columns: 50% 50%;
+}
+
+#imprint {
+  text-align: left;
+  /* background-color: red; */
+}
+
+#date {
+  text-align: right;
+  /* background-color: green; */
+}
