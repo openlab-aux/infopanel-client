@@ -2,8 +2,6 @@ import DDateService from './services/ddate'
 import { TaskManager } from './services/content/taskManager'
 import FadeTransitioner from './services/content/fadeTransitioner'
 import HTTPYAMLTaskProvider from './services/content/yamlTaskProvider'
-import { IMessageSlide } from './entities/messageSlide'
-import MessageRenderer from './renderers/messageRenderer'
 
 window.addEventListener('DOMContentLoaded', (ev: Event) => {
     let dateElem = document.getElementById('date')

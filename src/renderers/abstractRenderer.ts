@@ -1,4 +1,4 @@
-import { ISlide } from '../entities/content'
+import { ISlide } from '../interfaces/Slide'
 import { Task } from '../services/content/taskManager'
 
 export default abstract class AbstractRenderer implements Task {

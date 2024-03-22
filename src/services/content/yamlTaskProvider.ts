@@ -1,10 +1,8 @@
 import axios from 'axios'
-import { Task, TaskGenerator } from './taskManager'
 import jsyaml from 'js-yaml'
-import { IContent, ISlide, isIContent, isISlide } from '../../entities/content'
-import AbstractRenderer from '../../renderers/abstractRenderer'
-import { Renderer } from 'marked'
-import getRendererFactory from '../../renderers/factory'
+
+import { IContent, isIContent } from '../../interfaces/Content'
+import { Task, TaskGenerator } from './taskManager'
 import getRenderer from '../../renderers/factory'
 
 export default class HTTPYAMLTaskProvider implements TaskGenerator {

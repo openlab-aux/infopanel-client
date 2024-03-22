@@ -3,7 +3,7 @@ import * as marked from 'marked'
 import CancellableTimeout from '../util/CancellableTimeout'
 import SetContent from '../util/SetContent'
 import AbstractRenderer from './abstractRenderer'
-import { ISlide } from '../entities/content'
+import { ISlide } from '../interfaces/Slide'
 
 interface MarkdownColunn {
     width: number
@@ -75,7 +75,6 @@ export default class MarkdownRenderer extends AbstractRenderer {
 
                         #col-${index} {
                             flex: ${current.width}%;
-                            background-color: ${'#' + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6)};
                         }
                     `
                     )

@@ -1,4 +1,6 @@
-import { ISlide } from '../entities/content'
+import { IContent } from '../interfaces/Content'
+import { ISlide } from '../interfaces/Slide'
+
 import AbstractRenderer from './abstractRenderer'
 import MarkdownRenderer from './markdownRenderer'
 import MessageRenderer from './messageRenderer'

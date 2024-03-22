@@ -1,7 +1,17 @@
-import { IMessageSlide } from '../entities/messageSlide'
 import CancellableTimeout from '../util/CancellableTimeout'
 import SetContent from '../util/SetContent'
 import AbstractRenderer from './abstractRenderer'
+import { ISlide } from '../interfaces/Slide'
+
+export interface IMessageSlide extends ISlide {
+    message: {
+        text: string
+    }
+}
+
+function isIMessageSlide(slide: ISlide): slide is IMessageSlide {
+    return 'message' in slide && typeof slide.message == 'object'
+}
 
 export default class MessageRenderer extends AbstractRenderer {
     stylesheet = `
