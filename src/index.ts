@@ -2,6 +2,9 @@ import DDateService from './services/ddate'
 import { TaskManager } from './services/content/taskManager'
 import FadeTransitioner from './services/content/fadeTransitioner'
 import HTTPYAMLTaskProvider from './services/content/yamlTaskProvider'
+import ConfigService from './services/config'
+
+var configService = new ConfigService()
 
 window.addEventListener('DOMContentLoaded', (ev: Event) => {
     let dateElem = document.getElementById('date')
@@ -14,7 +17,7 @@ window.addEventListener('DOMContentLoaded', (ev: Event) => {
     if (contentElem != null && contentStyleElem != null) {
         let mgr = new TaskManager(
             new FadeTransitioner(contentElem),
-            new HTTPYAMLTaskProvider('/content.yaml'),
+            new HTTPYAMLTaskProvider(configService.getConfig().contentUrl),
             contentElem
         )
 
