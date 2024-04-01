@@ -40,15 +40,9 @@ export default class DDate {
     }
 
     getDayOfYear(): number {
-        const startOfYear = new Date(this.date.getFullYear(), 0, 0)
+        const startOfYear = new Date(this.date.getFullYear(), 0, 1)
         const diff = this.date.valueOf() - startOfYear.valueOf()
-        let days = Math.floor(diff / 1000 / 60 / 60 / 24)
-
-        if (this.isLeapYear() && this.date.getMonth() >= 2) {
-            days -= 1
-        }
-
-        return days
+        return Math.floor(diff / 1000 / 60 / 60 / 24) + 1
     }
 
     getSeason(): number {
@@ -68,7 +62,10 @@ export default class DDate {
     }
 
     getDayOfWeekName(): string {
-        return DDate.weekday[this.getDayOfWeek()]
+        if(this.isLeapYear() && this.getDayOfYear() == 60) {
+            return "St. Tibb's Day"
+        }
+        return DDate.weekday[this.getDayOfWeek() - 1]
     }
 
     getYear(): number {
