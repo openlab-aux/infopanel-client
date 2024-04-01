@@ -3,10 +3,13 @@ import { TaskManager } from './services/content/taskManager'
 import FadeTransitioner from './services/content/fadeTransitioner'
 import HTTPYAMLTaskProvider from './services/content/yamlTaskProvider'
 import ConfigService from './services/config'
+import MessageRenderer, { IMessageSlide } from './renderers/messageRenderer'
 
 var configService = new ConfigService()
 
 window.addEventListener('DOMContentLoaded', (ev: Event) => {
+    document.body.style.cursor = 'none'
+
     let dateElem = document.getElementById('date')
     if (dateElem != null) {
         new DDateService(dateElem).start()
@@ -22,5 +25,16 @@ window.addEventListener('DOMContentLoaded', (ev: Event) => {
         )
 
         mgr.run()
+
+        window.onclick = (ev) => {
+            mgr.flash(
+                new MessageRenderer({
+                    type: "message",
+                    message: { "text": "fnord" },
+                    duration: 250
+                } as IMessageSlide)
+            )
+        }
     }
+
 })

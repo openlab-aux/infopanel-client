@@ -1,7 +1,26 @@
-@font-face {
-  font-family: SFProDisplayRegular;
-  src: url("SF-Pro-Display-Regular.otf") format("opentype");
+@media(prefers-color-scheme: light) {
+  body {
+    background-color: lightgray;
+    color: darkslategrey;
+  }
+
+  a {
+    color: darkslateblue;
+  }
 }
+
+@media(prefers-color-scheme: dark) {
+  body {
+    color: lightgray;
+    background-color: darkslategrey;
+  }
+
+  a {
+    color: lightblue;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 html {
   height: 100%;
@@ -10,7 +29,7 @@ html {
 }
 
 body {
-  font-family: SFProDisplayRegular;
+  font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
   display: grid;
   grid-template-rows: 1fr auto;
 }
@@ -21,9 +40,12 @@ body {
 }
 
 #footer {
+  font-size: 200%;
   display: grid;
-  top: 12pt;
-  left: 12pt;
+  top: 50pt;
+  margin-left: 30pt;
+  margin-right: 30pt;
+  margin-bottom: 5pt;
   grid-template-columns: 50% 50%;
 }
 

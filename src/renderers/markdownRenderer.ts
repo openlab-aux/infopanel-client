@@ -29,15 +29,6 @@ function isIMarkdownSlide(slide: ISlide): slide is IMarkdownSlide {
 }
 
 export default class MarkdownRenderer extends AbstractRenderer {
-    stylesheet = `
-    #markdown {
-        width: 95%;
-        margin-left: 2.5%;
-        font-size: 200%;
-        display: flex;
-    }
-    `
-
     timeout: CancellableTimeout | undefined
     cancelled = false
 
@@ -61,10 +52,18 @@ export default class MarkdownRenderer extends AbstractRenderer {
         })
 
         if (currentSlide.markdown.text) {
+            let style = `
+                #markdown {
+                    width: 95%;
+                    margin-left: 2.5%;
+                    font-size: 260%;
+                }
+            `
+
             marked
                 .parse(currentSlide.markdown.text, { async: true })
                 .then((html) => {
-                    SetContent(target, html, this.stylesheet)
+                    SetContent(target, html, style)
                 })
         } else if (currentSlide.markdown.columns !== undefined) {
             let style = currentSlide.markdown.columns.reduce(
@@ -72,14 +71,20 @@ export default class MarkdownRenderer extends AbstractRenderer {
                     return (
                         prev +
                         `
-
                         #col-${index} {
                             flex: ${current.width}%;
                         }
-                    `
+                        `
                     )
                 },
-                this.stylesheet
+                `
+                #markdown {
+                    width: 95%;
+                    margin-left: 2.5%;
+                    font-size: 260%;
+                    display: flex;
+                }
+                `
             )
 
             Promise.allSettled(
