@@ -4,6 +4,15 @@ import jsyaml from 'js-yaml'
 import { IContent, isIContent } from '../../interfaces/Content'
 import { Task, TaskGenerator } from './taskManager'
 import getRenderer from '../../renderers/factory'
+import MessageRenderer, { IMessageSlide } from '../../renderers/messageRenderer'
+
+const defaultSlide: IMessageSlide = {
+    'duration': 10000,
+    'type': 'message',
+    'message': {
+        'text': 'lade inhalte...'
+    }
+}
 
 export default class HTTPYAMLTaskProvider implements TaskGenerator {
     private tasks: Array<Task> = new Array<Task>()
@@ -48,10 +57,19 @@ export default class HTTPYAMLTaskProvider implements TaskGenerator {
 
     async next(): Promise<Task> {
         if (this.tasks.length == 0) {
-            this.tasks = await HTTPYAMLTaskProvider.loadTasks(this.endpointURL)
+            try {
+                this.tasks = await HTTPYAMLTaskProvider.loadTasks(this.endpointURL)
+            } catch (e) {
+                console.error(e)
+
+                this.tasks = [
+                    new MessageRenderer(defaultSlide)
+                ]
+            }
         }
 
         let task = this.tasks.pop()
+
         if (!task) {
             throw new Error('no tasks available')
         } else {
