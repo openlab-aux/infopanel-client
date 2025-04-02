@@ -6,6 +6,6 @@ RUN ls -lah
 RUN npm install --include dev
 RUN npm run build
 
-
-FROM docker.io/nginxinc/nginx-unprivileged:1.27.4
+FROM docker.io/library/nginx:1.27.4-alpine
+COPY ./docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist/* /usr/share/nginx/html/
